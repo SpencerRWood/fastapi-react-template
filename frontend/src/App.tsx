@@ -1,10 +1,10 @@
-import { BackendStatus } from "./components/BackendStatus";
+import { AppShell } from "@/layouts/app-shell";
+import { LandingPage } from "@/pages/landing";
 
-export function App() {
+export default function App() {
   return (
-    <main style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-      <h1>FastAPI + React MVP</h1>
-      <BackendStatus />
-    </main>
+    <AppShell>
+      <LandingPage />
+    </AppShell>
   );
 }
