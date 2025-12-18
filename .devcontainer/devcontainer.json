@@ -23,6 +23,11 @@
   "postCreateCommand": "python -m pip install -U pip && python -m pip install -e backend[dev] && cd frontend && npm ci",
   "postStartCommand": "bash .devcontainer/start-dev.sh",
   "forwardPorts": [8000, 5173],
-  "runArgs": ["--init", "--privileged"],
+  "runArgs": [
+  "--init",
+  "--privileged",
+  "-p", "8000:8000",
+  "-p", "5173:5173"
+],
   "remoteUser": "vscode"
 }
