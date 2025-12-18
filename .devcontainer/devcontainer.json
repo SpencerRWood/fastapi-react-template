@@ -1,26 +1,13 @@
 {
   "name": "fastapi-react-template",
-
-  // Use devcontainer Features to install Python + Node
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-
   "features": {
-    "ghcr.io/devcontainers/features/python:1": {
-      "version": "3.11"
-    },
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "18"
-    },
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {
-      "moby": true
-    }
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.11" },
+    "ghcr.io/devcontainers/features/node:1": { "version": "18" },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": { "moby": true }
   },
-
-  // Folders to mount inside container
   "workspaceFolder": "/workspace",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
-
-  // Recommended editor extensions
   "customizations": {
     "vscode": {
       "extensions": [
@@ -33,15 +20,9 @@
       ]
     }
   },
-
-  // Run setup scripts after container builds
-  "postCreateCommand": "pip install -r backend/requirements.txt || true && cd frontend && npm install || true",
-
-  // For FastAPI (8000), Vite dev server (5173)
+  "postCreateCommand": "python -m pip install -U pip && python -m pip install -e backend[dev] && cd frontend && npm ci",
+  "postStartCommand": "bash .devcontainer/start-dev.sh",
   "forwardPorts": [8000, 5173],
-
-  // Allow Docker Compose from inside devcontainer
   "runArgs": ["--init", "--privileged"],
-
   "remoteUser": "vscode"
 }
